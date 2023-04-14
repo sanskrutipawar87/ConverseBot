@@ -127,6 +127,11 @@ const Home = () => {
                   maxHeight: "800px",
 
                 },
+                '@media (min-width: 720px)': { // adjust height for laptops and larger screens
+                  minHeight: "500px",
+                  maxHeight: "500px",
+
+                },
               }}>
                 <MainContainer style={{margin:"10px", borderStyle:"none"}}>
                   <ChatContainer>
