@@ -103,7 +103,7 @@ const Home = () => {
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
             {/* Home Page */}
             <Grid item xs={12}>
@@ -114,40 +114,46 @@ const Home = () => {
                 maxHeight: "100vh", // set minimum height to full viewport height
                 height: "100%", // set height to 100% of parent container
                 overflow: "hidden", // hide overflow to prevent scrolling
+
                 '@media (min-width: 320px)': { // adjust height for phones and larger screens
-                  minHeight: "550px",
-                  maxHeight: "550px",
+                  minHeight: "85vh",
+                  maxHeight: "85vh"
                 },
-                '@media (min-width: 768px)': { // adjust height for tablets and larger screens
-                  minHeight: "700px",
-                  maxHeight: "700px",
+
+                '@media (min-width: 600px)': { // adjust height for tablets and larger screens
+                  minHeight: "85vh",
+                  maxHeight: "85vh"
+                },
+                '@media (min-width: 768px)': { // adjust height for laptops and larger screens
+                  minHeight: "85vh",
+                  maxHeight: "85vh"
                 },
                 '@media (min-width: 1024px)': { // adjust height for laptops and larger screens
-                  minHeight: "800px",
-                  maxHeight: "800px",
-
+                  minHeight: "100vh",
+                  maxHeight: "100vh"
                 },
-                '@media (min-width: 720px)': { // adjust height for laptops and larger screens
-                  minHeight: "500px",
-                  maxHeight: "500px",
 
+                '@media (min-width: 1920px)': { // adjust height for laptops and larger screens
+                  minHeight: "85vh",
+                  maxHeight: "85vh"
                 },
+
               }}>
-                <MainContainer style={{margin:"10px", borderStyle:"none"}}>
-                  <ChatContainer>
-                    <MessageList
-                      scrollBehavior="smooth"
-                      typingIndicator={isTyping ? <TypingIndicator content="ConverseBot is typing" /> : null}
-                    >
-                      {messages.map((message, i) => {
-                        console.log(message)
-                        return <Message key={i} model={message} />
-                      })}
-                    </MessageList>
-                    <MessageInput placeholder="Type message here"
-                      onSend={handleSend} />
-                  </ChatContainer>
-                </MainContainer>
+
+                <ChatContainer style={{margin:"10px"}}>
+                  <MessageList
+                    scrollBehavior="smooth"
+                    typingIndicator={isTyping ? <TypingIndicator content="ConverseBot is typing" /> : null}
+                  >
+                    {messages.map((message, i) => {
+                      console.log(message)
+                      return <Message key={i} model={message} />
+                    })}
+                  </MessageList>
+                  <MessageInput placeholder="Type message here"
+                    onSend={handleSend} />
+                </ChatContainer>
+
               </Paper>
             </Grid>
           </Grid>

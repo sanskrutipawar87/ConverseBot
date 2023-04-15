@@ -61,7 +61,7 @@ const ContactMe = () => {
                     <Grid container spacing={3}>
                         {/* Home Page */}
                         <Grid item xs={12}>
-                            <Container component="main" maxWidth="xs">
+                            <Container component="main" maxWidth="xl">
                                 <Box
                                     sx={{
                                         marginTop: 8,
