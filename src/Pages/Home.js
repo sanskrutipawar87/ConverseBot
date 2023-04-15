@@ -7,13 +7,11 @@ import {
   MessageList,
   MessageInput,
   Message,
-  MainContainer,
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
-import axios from "axios";
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const systemMessage = {
   "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
@@ -75,26 +73,25 @@ const Home = () => {
       ]
     }
 
-    try {
-      const response = await axios.post("https://api.openai.com/v1/chat/completions", apiRequestBody, {
+    await fetch("https://api.openai.com/v1/chat/completions",
+      {
+        method: "POST",
         headers: {
           "Authorization": "Bearer " + API_KEY,
           "Content-Type": "application/json"
-        }
+        },
+        body: JSON.stringify(apiRequestBody)
+      }).then((data) => {
+        return data.json();
+      }).then((data) => {
+        console.log(data);
+        setMessages([...chatMessages, {
+          message: data.choices[0].message.content,
+          sender: "ChatGPT"
+        }]);
+        setIsTyping(false);
       });
-
-      console.log(response.data);
-      setMessages([...chatMessages, {
-        message: response.data.choices[0].message.content,
-        sender: "ChatGPT"
-      }]);
-      setIsTyping(false);
-
-    } catch (error) {
-      console.log(error);
-    }
   }
-
 
   return (
     <>
