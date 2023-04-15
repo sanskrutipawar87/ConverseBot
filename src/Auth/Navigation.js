@@ -12,8 +12,7 @@ const Navigation = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/AboutMe" element={<AboutMe />} />
-        <Route exact path="/ContactMe" element={<ContactMe />} />
-        
+        <Route exact path="/ContactMe" element={<ContactMe />} />  
       </Routes>
     </HashRouter>
   );

@@ -13,7 +13,7 @@ import {
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import axios from "axios";
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const systemMessage = {
   "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
@@ -21,11 +21,12 @@ const systemMessage = {
 
 const Home = () => {
 
+  const [display, setdisplay] = useState('chatbot')
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm ConverseBot! Ask me anything!",
+      message: "Hello, I'm ChatGPT! Ask me anything!",
       sentTime: "just now",
-      sender: "ConverseBot"
+      sender: "ChatGPT"
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
@@ -41,14 +42,20 @@ const Home = () => {
 
     setMessages(newMessages);
 
+    // Initial system message to determine ChatGPT functionality
+    // How it responds, how it talks, etc.
     setIsTyping(true);
     await processMessageToChatGPT(newMessages);
   };
 
-  async function processMessageToChatGPT(chatMessages) {
+  async function processMessageToChatGPT(chatMessages) { // messages is an array of messages
+    // Format messages for chatGPT API
+    // API is expecting objects in format of { role: "user" or "assistant", "content": "message here"}
+    // So we need to reformat
+
     let apiMessages = chatMessages.map((messageObject) => {
       let role = "";
-      if (messageObject.sender === "ConverseBot") {
+      if (messageObject.sender === "ChatGPT") {
         role = "assistant";
       } else {
         role = "user";
@@ -56,36 +63,38 @@ const Home = () => {
       return { role: role, content: messageObject.message }
     });
 
+
+    // Get the request body set up with the model we plan to use
+    // and the messages which we formatted above. We add a system message in the front to'
+    // determine how we want chatGPT to act. 
     const apiRequestBody = {
-      "model": "davinci",
-      "prompt": systemMessage.content,
-      "temperature": 0.8,
-      "max_tokens": 60,
-      "stop": ["\n"]
+      "model": "gpt-3.5-turbo",
+      "messages": [
+        systemMessage,  // The system message DEFINES the logic of our chatGPT
+        ...apiMessages // The messages from our chat with ChatGPT
+      ]
     }
-
-    apiRequestBody["prompt"] += "\nUser: " + apiMessages[apiMessages.length - 1].content;
-
-    const headers = {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${API_KEY}`,
-    };
 
     try {
-      const response = await axios.post(
-        "https://api.openai.com/v1/completions",
-        apiRequestBody,
-        { headers: headers }
-      );
-      const { choices } = response.data;
-      const botMessage = choices[0].text.trim();
-      setMessages([...chatMessages, { message: botMessage, sender: "ConverseBot" }]);
-    } catch (error) {
-      console.error(error);
-    }
+      const response = await axios.post("https://api.openai.com/v1/chat/completions", apiRequestBody, {
+        headers: {
+          "Authorization": "Bearer " + API_KEY,
+          "Content-Type": "application/json"
+        }
+      });
 
-    setIsTyping(false);
+      console.log(response.data);
+      setMessages([...chatMessages, {
+        message: response.data.choices[0].message.content,
+        sender: "ChatGPT"
+      }]);
+      setIsTyping(false);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
+
 
   return (
     <>
@@ -140,10 +149,10 @@ const Home = () => {
 
               }}>
 
-                <ChatContainer style={{margin:"10px"}}>
+                <ChatContainer style={{ margin: "10px" }}>
                   <MessageList
                     scrollBehavior="smooth"
-                    typingIndicator={isTyping ? <TypingIndicator content="ConverseBot is typing" /> : null}
+                    typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
                   >
                     {messages.map((message, i) => {
                       console.log(message)

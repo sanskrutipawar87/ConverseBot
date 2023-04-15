@@ -1,6 +1,7 @@
 import "./App.css";
 import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import Navigation from "./Auth/Navigation";
+
+import Auth from "./Auth/Auth";
 
 const mdTheme = createTheme();
 
@@ -9,7 +10,7 @@ function App() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <Navigation/>
+        <Auth/>
       </Box>
     </ThemeProvider>
   );
