@@ -13,7 +13,7 @@ import {
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import axios from "axios";
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const systemMessage = {
   "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
