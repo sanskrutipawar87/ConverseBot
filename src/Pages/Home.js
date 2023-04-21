@@ -11,7 +11,7 @@ import {
 } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const systemMessage = {
   "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
