@@ -22,7 +22,7 @@ const Home = () => {
   const [display, setdisplay] = useState('chatbot')
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm ChatGPT! Ask me anything!",
+      message: "Hello, I'm ConverseBot! Ask me anything!",
       sentTime: "just now",
       sender: "ChatGPT"
     }

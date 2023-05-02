@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import emailjs from "emailjs-com"
 
 const ContactMe = () => {
 
@@ -33,11 +34,16 @@ const ContactMe = () => {
             message: '',
         },
         validationSchema,
-        onSubmit: async (values) => {
-            setSubmitting(true);
-            console.log(values);
-            // Do your submission logic here
-            setSubmitting(false);
+        onSubmit: (values) => {
+            emailjs.sendForm(
+                'service_if5k0dh',
+                'template_jl0xi69',
+                values,
+                'user_y0weAW0lGQItxeQe1BwpK',
+                ).then(res => {
+                  alert("Your Form has Been Submitted SuccessFully")        
+
+              }).catch(err => alert("| ERROR | PLEASE TRY AGAIN | : ", err))    
         },
     });
 
