@@ -36,7 +36,7 @@ const AboutMe = () => {
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                 <Avatar
                   alt="Sanskruti Pawar"
-                  src="/profile.jpg"
+                  src="/avatar.png"
                   sx={{ width: "150px", height: "150px", margin: "auto" }}
                 />
                 <Typography variant="h5" sx={{ mt: 2 }}>
