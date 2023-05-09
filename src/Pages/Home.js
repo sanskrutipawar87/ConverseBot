@@ -11,7 +11,7 @@ import {
 } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const systemMessage = {
   "role": "system", "content": "Explain things like you're talking to a software professional with 2 years of experience."
@@ -22,7 +22,7 @@ const Home = () => {
   const [display, setdisplay] = useState('chatbot')
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm ConverseBot! Ask me anything!",
+      message: "Hello, I'm ChatGPT! Ask me anything!",
       sentTime: "just now",
       sender: "ChatGPT"
     }
@@ -149,14 +149,14 @@ const Home = () => {
                 <ChatContainer style={{ margin: "10px" }}>
                   <MessageList
                     scrollBehavior="smooth"
-                    typingIndicator={isTyping ? <TypingIndicator content="ConverseBot is typing" /> : null}
+                    typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
                   >
                     {messages.map((message, i) => {
                       console.log(message)
                       return <Message key={i} model={message} />
                     })}
                   </MessageList>
-                  <MessageInput autoFocus={true} placeholder="Type message here"
+                  <MessageInput placeholder="Type message here"
                     onSend={handleSend} />
                 </ChatContainer>
 
