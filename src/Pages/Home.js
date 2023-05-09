@@ -149,14 +149,14 @@ const Home = () => {
                 <ChatContainer style={{ margin: "10px" }}>
                   <MessageList
                     scrollBehavior="smooth"
-                    typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
+                    typingIndicator={isTyping ? <TypingIndicator content="ConverseBot is typing" /> : null}
                   >
                     {messages.map((message, i) => {
                       console.log(message)
                       return <Message key={i} model={message} />
                     })}
                   </MessageList>
-                  <MessageInput placeholder="Type message here"
+                  <MessageInput autoFocus={true} placeholder="Type message here"
                     onSend={handleSend} />
                 </ChatContainer>
 
